@@ -1,4 +1,6 @@
-{
+#!/bin/bash
+
+echo'{
   "MaxCount": 2,
   "MinCount": 2,
   "ImageId": "ami-0b2ac948e23c57071",
@@ -37,4 +39,6 @@
     "EnableResourceNameDnsARecord": true,
     "EnableResourceNameDnsAAAARecord": false
   }
-}
+}' > config.json
+
+aws ec2 run-instances --cli-input-json file://config.json

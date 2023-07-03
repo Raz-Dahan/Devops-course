@@ -22,5 +22,5 @@ if [[ $ANSWER = "n" ]]; then
   exit 0
 fi
 
-IDS=$(aws ec2 describe-instances --filters "Name=instance-type,Values=t2.micro" --query "Reservations[].Instances[].InstanceId")
+IDS=$(aws ec2 describe-instances --filters "Name=instance-type,Values=t2.micro" --query "Reservations[].Instances[].InstanceId" --output text)
 aws ec2 $ACTION-instances --instance-ids $IDS
