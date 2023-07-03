@@ -7,11 +7,11 @@ echo "#!/bin/bash
 sudo yum update -y
 sudo yum install git -y
 sudo yum install python3-pip -y
-git clone https://github.com/Raz-Dahan/sample-flask.git
-cd sample-flask/alpaca-flask/
+git clone https://github.com/Raz-Dahan/flask-websites.git
+cd flask-websites/alpaca-flask/
 pip install -r requirements.txt
 echo \"#!/bin/sh
-cd /sample-flask/alpaca-flask/
+cd /flask-websites/alpaca-flask/
 flask run --host=0.0.0.0
 exit 0\" > /etc/rc.d/rc.local
 sudo chmod -v +x /etc/rc.d/rc.local
