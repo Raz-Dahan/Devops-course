@@ -1,2 +1,2 @@
-# exercises
-exercises from Devops course
+# SELA Devops Course
+Exercises solutions from Devops course
