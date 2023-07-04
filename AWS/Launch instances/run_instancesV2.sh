@@ -108,3 +108,5 @@ echo '{
 }' > config.json
 
 aws ec2 run-instances --region $AWS_REGION --cli-input-json file://config.json &> /dev/null
+
+echo 'New "Prod" and "Dev" instances are running'
