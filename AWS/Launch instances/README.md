@@ -12,10 +12,4 @@ aws configure
 
 ## Usage
 
-To start the instances, use the following command:
-
-```
-aws ec2 run-instances --cli-input-json file://runinstances-config.json
-```
-
-Make sure to modify the `runinstances-config.json` file to specify the desired instance configuration, such as the AMI ID, instance type, security groups, and key pair.
+Make sure to modify the echo that trnsfer to `config.json` file to specify the desired instance configuration, such as the AMI ID, instance type, security groups, and key pair.
