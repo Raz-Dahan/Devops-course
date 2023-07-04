@@ -16,8 +16,8 @@ prod_instances=$(aws ec2 describe-instances --region $AWS_REGION --filters "Name
 dev_instances=$(aws ec2 describe-instances --region $AWS_REGION --filters "Name=tag:Name,Values=Dev" "Name=tag:platform,Values=test" --query "Reservations[*].Instances[*].InstanceId" --output text)
 
 for instance_id in $prod_instances $dev_instances; do
-  delete_tags $instance_id
-  terminate_instance $instance_id
+  delete_tags $instance_id &> /dev/null
+  terminate_instance $instance_id &> /dev/null
   echo "Terminated instance $instance_id"
 done
 
@@ -63,7 +63,7 @@ echo '{
   }
 }' > config.json
 
-aws ec2 run-instances --region $AWS_REGION --cli-input-json file://config.json
+aws ec2 run-instances --region $AWS_REGION --cli-input-json file://config.json &> /dev/null
 
 
 echo '{
@@ -107,4 +107,4 @@ echo '{
   }
 }' > config.json
 
-aws ec2 run-instances --region $AWS_REGION --cli-input-json file://config.json
+aws ec2 run-instances --region $AWS_REGION --cli-input-json file://config.json &> /dev/null
