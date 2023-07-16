@@ -34,6 +34,6 @@ gcloud beta container --project "named-signal-392608" clusters create "nasa-clus
 --no-enable-managed-prometheus \
 --enable-vertical-pod-autoscaling \
 --enable-shielded-nodes \
---node-locations "us-central1-c"
+--node-locations "us-central1-a"
 
 
