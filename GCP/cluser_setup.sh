@@ -1,7 +1,7 @@
 #/bin/bash
 
-gcloud beta container --project "named-signal-392608" clusters create "nasa-cluster-1" \
---zone "us-central1-c" \
+gcloud beta container --project "named-signal-392608" clusters create "nasa-cluster" \
+--zone "us-central1-a" \
 --no-enable-basic-auth \
 --cluster-version "1.26.5-gke.1200" \
 --release-channel "regular" \
