@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 gcloud compute instances create test \
     --project=named-signal-392608 \
@@ -9,7 +9,7 @@ gcloud compute instances create test \
     --provisioning-model=STANDARD \
     --service-account=211301241684-compute@developer.gserviceaccount.com \
     --scopes=https://www.googleapis.com/auth/cloud-platform \
-    --tags=http-server,https-server \
+    --tags=http-server,https-server,allow-ports \
     --create-disk=auto-delete=yes,boot=yes,device-name=test,image=projects/debian-cloud/global/images/debian-11-bullseye-v20230711,mode=rw,size=10,type=projects/named-signal-392608/zones/us-central1-a/diskTypes/pd-balanced \
     --no-shielded-secure-boot \
     --shielded-vtpm \
