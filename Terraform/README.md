@@ -16,46 +16,26 @@ Follow these steps to deploy the AWS infrastructure using Terraform:
 1. Clone this repository to your local machine.
 
 ```bash
-git clone https://github.com/yourusername/terraform-aws-infrastructure.git
-cd terraform-aws-infrastructure
+git clone https://github.com/Raz-Dahan/Devops-course.git
+cd Devops-course/Terraform
 ```
 
-2. Initialize Terraform within each sub-folder containing the Terraform files.
+2. Initialize Terraform with chosen Terraform file's folder.
 
 ```bash
-cd path/to/tf-file1
-terraform init
-
-cd path/to/tf-file2
-terraform init
-
-cd path/to/tf-file3
+cd <chosen folder>
 terraform init
 ```
 
 3. Review the Terraform plans to understand the changes that will be made to your AWS account.
 
 ```bash
-cd path/to/tf-file1
-terraform plan
-
-cd path/to/tf-file2
-terraform plan
-
-cd path/to/tf-file3
 terraform plan
 ```
 
 4. If the Terraform plans look good, proceed with applying them.
 
 ```bash
-cd path/to/tf-file1
-terraform apply
-
-cd path/to/tf-file2
-terraform apply
-
-cd path/to/tf-file3
 terraform apply
 ```
 
@@ -70,13 +50,13 @@ Two of the Terraform configurations create instances and also generate an RSA ke
 3. Secure the private key file with appropriate permissions.
 
 ```bash
-chmod 400 /path/to/your/private-key.pem
+chmod 400 tf-keypair.pem
 ```
 
 4. Connect to the instance using SSH and the private key file.
 
 ```bash
-ssh -i "/path/to/your/private-key.pem" ec2-user@instance-ip-address
+ssh -i "tf-keypair.pem" ec2-user@<instance-ip-address>
 ```
 
 ## Public IPs
