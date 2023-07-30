@@ -7,7 +7,7 @@ resource "tls_private_key" "keypair" {
 }
 
 resource "aws_key_pair" "keypair" {
-  key_name   = "tf-keyapir"
+  key_name   = "tf-keypair"
   public_key = tls_private_key.keypair.public_key_openssh
 }
 
