@@ -73,6 +73,6 @@ resource "aws_instance" "nginx" {
 resource "local_file" "public_ips" {
   filename = "public_ips.txt"
   content  = <<EOT
-Instance Public IP: ${aws_instance.test.public_ip}
+Instance Public IP: ${aws_instance.nginx.public_ip}
 EOT
 }
