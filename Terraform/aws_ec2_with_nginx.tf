@@ -49,12 +49,13 @@ resource "aws_security_group" "security_group" {
   }
 }
 
-resource "aws_instance" "test" {
+resource "aws_instance" "nginx" {
   ami           = "ami-0e00e602389e469a3"
   instance_type = "t2.micro"
 
   tags = {
-    Name = "TerraformTest"
+    Name     = "Nginx"
+    platfrom = "terraform"
   }
 
   key_name               = aws_key_pair.keypair.key_name
