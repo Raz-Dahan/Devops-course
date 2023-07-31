@@ -2,15 +2,6 @@ provider "aws" {
   region = "eu-central-1"
 }
 
-resource "null_resource" "change_permissions" {
-  triggers = {
-    ssh_key_file = tls_private_key.keypair.private_key_pem
-  }
-
-  provisioner "local-exec" {
-    command = "chmod 600 ${local_file.private_key.filename}"
-  }
-}
 resource "tls_private_key" "keypair" {
   algorithm = "RSA"
 }
@@ -18,15 +9,12 @@ resource "tls_private_key" "keypair" {
 resource "aws_key_pair" "keypair" {
   key_name   = "tf-keypair"
   public_key = tls_private_key.keypair.public_key_openssh
-
-  lifecycle {
-    ignore_changes = [key_name]
-  }
 }
 
 resource "local_file" "private_key" {
-  filename = "tf-keypair.pem"
-  content  = tls_private_key.keypair.private_key_pem
+  filename        = "tf-keypair.pem"
+  content         = tls_private_key.keypair.private_key_pem
+  file_permission = "0600"
 }
 
 resource "aws_security_group" "security_group" {
