@@ -63,8 +63,10 @@ resource "aws_security_group" "security_group" {
 }
 
 resource "aws_instance" "app" {
-  ami           = "ami-0e00e602389e469a3"
-  instance_type = "t2.micro"
+  ami                    = "ami-0e00e602389e469a3"
+  instance_type          = "t2.micro"
+  key_name               = aws_key_pair.keypair.key_name
+  vpc_security_group_ids = [aws_security_group.security_group.id]
 
   tags = {
     Name     = "NASA App"
@@ -72,27 +74,27 @@ resource "aws_instance" "app" {
     tier     = "production"
   }
 
-  key_name               = aws_key_pair.keypair.key_name
-  vpc_security_group_ids = [aws_security_group.security_group.id]
+  connection {
+    type        = "ssh"
+    user        = "ec2-user"
+    private_key = tls_private_key.keypair.private_key_pem
+    host        = self.public_ip
+  }
+
+  provisioner "file" {
+    source      = "docker-compose.yml"
+    destination = "/home/ec2-user/docker-compose.yml"
+  }
 
   provisioner "remote-exec" {
-    connection {
-      type        = "ssh"
-      user        = "ec2-user"
-      private_key = tls_private_key.keypair.private_key_pem
-      host        = self.public_ip
-    }
-
     inline = [
       "sudo yum update -y",
-      "sudo yum install git -y",
-      "git clone https://github.com/Raz-Dahan/Devops-course.git",
       "sudo yum install docker -y",
       "sudo systemctl enable docker.service",
       "sudo systemctl start docker.service",
       "sudo curl -L \"https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)\" -o /usr/local/bin/docker-compose",
       "sudo chmod +x /usr/local/bin/docker-compose",
-      "sudo docker-compose -f Devops-course/Terraform/aws-ec2-flask-setup/docker-compose.yml up -d",
+      "sudo docker-compose -f /home/ec2-user/docker-compose.yml up -d",
     ]
   }
 }
