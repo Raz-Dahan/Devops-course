@@ -3,9 +3,17 @@ RED_TEAM = 'RED'
 BLUE_TEAM = 'BLUE'
 
 def game():
-    RED = player_turn(RED_TEAM)
-    BLUE = player_turn(BLUE_TEAM)
-    return check_win(RED, BLUE)
+    while True:
+        RED = player_turn(RED_TEAM)
+        BLUE = player_turn(BLUE_TEAM)
+        
+        result = check_win(RED, BLUE)
+        print(result)
+        
+        play_again = input("Do you want to play again? (yes/no): ").lower()
+        if play_again != 'yes':
+            print("Thanks for playing!")
+            break
     
 
 def player_turn(TEAM):
@@ -22,4 +30,5 @@ def check_win(RED, BLUE):
         return "IT'S A TIE!"
     else:
         return 'BLUE WINS!'
+
 print(game())
