@@ -31,4 +31,4 @@ def check_win(RED, BLUE):
     else:
         return 'BLUE WINS!'
 
-print(game())
+game()
